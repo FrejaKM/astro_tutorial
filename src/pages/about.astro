@@ -1,22 +1,67 @@
 ---
+import BaseLayout from '../layouts/BaseLayout.astro';
 
+const pageTitle = "About Page";
+const pageSubtitle = "Here are a few facts about me";
+const identity = {
+  firstName: "Freja",
+  country: "Denmark",
+  occupation: "Student",
+  hobbies: ["photography", "baking", "knitting"],
+  
+};
+
+const skills = ["HTML", "CSS", "JavaScript", "Vue", "Astro", "Writing Docs"];
+const happy = true;
+const finished = false;
+const goal = 3;
+const skillColor = "crimson";
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-        <a href="/">Home</a>
-        <a href="/about">About</a>
-        <a href="/blog">Blog</a>
-        <h3>About</h3>
-		<h1>A bit about this site</h1>
-        <h2>This site is built with Astro</h2>
-        <p>Astro is a modern static site generator that allows you to build fast websites using your favorite frameworks.</p>
-	</body>
-</html>
+<BaseLayout pageTitle={pageTitle} pageSubtitle={pageSubtitle}>
+
+<p>The page owner of this site is very much still {identity.firstName}.</p>
+ <ul>
+            <li>My name is as mentioned {identity.firstName}.</li>
+
+            <li>I live in {identity.country} and I work as a {identity.occupation}.</li>
+
+            {identity.hobbies.length >= 2 &&
+            <li>Two of my hobbies are: {identity.hobbies[0]} and {identity.hobbies[1]}</li>
+            }
+        </ul>
+        <p>My skills are:</p>
+        <ul>
+            {skills.map((skill) => <li class="skill">{skill}</li>)}
+        </ul>
+        {happy && <p>I am happy to be learning Astro!</p>}
+
+        {finished && <p>I finished this tutorial!</p>}
+
+        {goal === 3 ? <p>My goal is to finish in 3 days.</p> : <p>My goal is not to finish in 3 days.</p>}
+
+        <details>
+        <summary>Click me</summary>
+        <p>Hidden content</p>
+        </details>  
+
+<style define:vars={{skillColor}}>
+        h1 {
+        color: purple;
+        font-size: 4rem;
+        }
+        .skill {
+            color: green;
+            color: var(--skillColor);
+            font-weight: bold;
+        }
+        </style>
+</BaseLayout>
+       
+
+
+
+
+
+
+
